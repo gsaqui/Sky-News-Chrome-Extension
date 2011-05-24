@@ -1,0 +1,19 @@
+{
+  "name": "Sky News",
+  "version": "1.0",
+  "description": "Sky News - allows you to see the latest news and once a breaking story comes you'll see a notification",
+  "browser_action": {
+    "default_icon": "icon.png",
+	 "popup": "buttonPopup.html"
+  },
+  "background_page": "background.html",
+  "options_page": "options.html",
+  "permissions": [
+	"tabs",
+	"notifications",
+	"contextMenus",
+	"http://news.sky.com/*",
+	"http://api.twitter.com/*",
+	"http://blogs.news.sky.com/rss/*"
+  ]
+}

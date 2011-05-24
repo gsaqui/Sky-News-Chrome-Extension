@@ -1,0 +1,74 @@
+<html>
+<script src = "./js/jquery-1.6.1.js"></script>
+<script src = "./js/jquery.jqote2.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/buttonPopup.css">
+<body>
+	<h2 id="sky-news-header">Sky News</h2>
+	<div id='rss-items'></div>
+
+
+<!-- Template for rss output -->
+<script type="text/x-jqote-template" id="template">
+    <![CDATA[
+    <li>
+        <a href="<%= this.link %>"><%= this.title %></a>
+    </li>
+    ]]>
+</script>
+
+
+<script>
+
+	/**
+	 * Redirects to Google news site according to clicked URL.
+	 * @param {Object} event Onclick event.
+	 */
+	function showStory(event) {
+	  var href = event.currentTarget.href;
+	  chrome.tabs.create({url: href});
+	  event.preventDefault();
+	
+	}
+
+  	function parseXml(xml){
+		var $tmpl = $('#template');
+		console.log('button popup-parseXml');
+		// console.log(xml);
+		 $(xml).find("item").each(function(){
+			/*console.log( $(this).find("title").text() );
+			console.log( $(this).find("link").text() );
+			console.log( $(this).find("description").text() );
+			console.log( $(this).find("enclosure").text() );
+			*/
+
+	        // add rss links
+	        $('#rss-items').jqoteapp($tmpl, {
+	            link: $(this).find("link").text(),
+	            title: $(this).find("title").text()
+	        });
+		 });
+		$('li a').click(function (e) {
+			showStory(e);
+		});		 
+	}//end of parseXml
+
+
+  function show() {
+	console.log('button popup');
+	// var url = "http://news.sky.com/sky-news/rss/home/rss.xml";
+	var url = window.localStorage.getItem('rssFeedToFollow');
+	$.ajax({
+		type: "GET",
+		url: url,
+		dataType: "xml",
+		success: parseXml
+	});
+  } //end of show
+
+	$(document).ready(function() {
+		show();
+	});
+
+</script>
+</body>
+</html>

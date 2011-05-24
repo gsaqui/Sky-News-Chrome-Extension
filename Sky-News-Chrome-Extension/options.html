@@ -1,0 +1,73 @@
+<script src = "/js/jquery-1.6.1.js"></script>
+<script src = "/js/jquery.jqote2.js"></script>
+<title>Options for Sky News</title>
+<style>
+  /* Clone the look and feel of "chrome://" pages. */
+  body {
+    margin: 10px;
+    font: 84% Arial, sans-serif
+  }
+
+  h1 { font-size: 156% }
+
+  h1 img {
+    margin: 1px 5px 0 1px;
+    vertical-align: middle
+  }
+
+  h2 {
+    border-top: 1px solid #9cc2ef;
+    background-color: #ebeff9;
+    padding: 3px 5px;
+    font-size: 100%
+  }
+</style>
+<h1>
+  Notification Demo
+</h1>
+<h2>Options</h2>
+<form id="options">
+  <input type="checkbox" class="enableTwitter" name="isActivated" >
+  Display Sky News breaking news stories
+<br><br>	
+	Rss to follow:
+<br><br>
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/home/rss.xml" /> Sky News Home<br />
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/uk-news/rss.xml" /> UK News<br />
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/world-news/rss.xml" /> World News<br />
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/business/rss.xml" /> Business<br />
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/strange-news/rss.xml" /> Strange But True<br />
+	<input type="radio" name="feeds" class="rss" value="http://blogs.news.sky.com/rss/editors10.xml" /> Sky News Blogs<br />	
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/politics/rss.xml" /> Politics<br />	
+	<input type="radio" name="feeds" class="rss" value="http://news.sky.com/sky-news/rss/technology/rss.xml" /> Technology<br />	
+</form>
+
+<script>
+	function isTwitterFeedActive(){
+		var enabled = window.localStorage.getItem('isTwitterEnabled');
+
+		$('.enableTwitter').prop('checked', enabled === 'true');		
+	}
+
+	$(document).ready(function() {
+		isTwitterFeedActive();	
+		
+		var rssSelected =   window.localStorage.getItem('rssFeedToFollow');	
+		$('.rss').each(function(){
+				if($(this).val() === rssSelected ){
+					console.log('same');
+					$(this).prop('checked', true);
+				}
+		});
+	});
+	
+	$('.enableTwitter').click(function () {
+		var enabled = window.localStorage.getItem('isTwitterEnabled');
+		window.localStorage.setItem('isTwitterEnabled', enabled !== 'true');
+	});
+	
+	$('.rss').click(function (e) {
+		var clicked = $(e.target).val();
+  		window.localStorage.setItem('rssFeedToFollow', clicked);		
+	});
+</script>

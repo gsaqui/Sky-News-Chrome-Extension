@@ -1,0 +1,13 @@
+body{
+	background-color: rgba(217, 205, 179, .5);
+}
+#rss-items{
+	width: 350px;
+	
+}
+h2{
+	color: rgba(40,31,24, 1);
+}
+li a{
+	color: rgba(134, 45, 29, 1);
+}
