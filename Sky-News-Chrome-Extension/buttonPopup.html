@@ -5,6 +5,7 @@
 <body>
 	<h2 id="sky-news-header">Sky News</h2>
 	<div id='rss-items'></div>
+	<a id='options-link' href='options.html'>Configure Extension</a> 
 
 
 <!-- Template for rss output -->
@@ -67,6 +68,11 @@
 
 	$(document).ready(function() {
 		show();
+	});
+
+	$('#options-link').bind('click', function(e){
+		chrome.tabs.create({url: chrome.extension.getURL('options.html')});
+		e.preventDefault();	
 	});
 
 </script>
