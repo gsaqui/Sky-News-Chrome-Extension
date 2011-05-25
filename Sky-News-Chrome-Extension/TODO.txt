@@ -4,7 +4,7 @@
 	- style --done
 	- hook it up to twitter --done
 - update icon
-- create presentation
+- allow the user to click on the front page to edit options - done
 
 Idea
 	- crowd sourcing?  -- how can we put that in our extension

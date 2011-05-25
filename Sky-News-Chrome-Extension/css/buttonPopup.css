@@ -5,9 +5,24 @@ body{
 	width: 350px;
 	
 }
+.headings{
+	position: relative;
+	clear: both;
+	width: 250px;
+	height: 50px;
+}
 h2{
 	color: rgba(40,31,24, 1);
+	float: left;
+	margin: 5px;
+	font-size: 15px;
 }
 li a{
 	color: rgba(134, 45, 29, 1);
+}
+#options-link{
+	color: green;
+	margin: 5px;
+	float: right;
+	font-size: 15px;
 }
