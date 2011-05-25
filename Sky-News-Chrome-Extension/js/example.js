@@ -25,6 +25,7 @@
  *	axis			| sets the scroll axis which will be synchronised, can be
  *					| x, y or xy. Defaults to xy which will synchronise both.
  *	------------------------------------------------------------------------
+ * $(window).add('#epg-channels').scrollsync({targetSelector: $(window), axis : 'y'});
  */
 $.fn.scrollsync = function( options ){
 	var settings = $.extend(
