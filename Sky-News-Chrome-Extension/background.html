@@ -99,8 +99,8 @@
 	if(enabled === 'true'){
 	    $.ajax({
 			type: "GET",
-			url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
-			// url: "demo/testData.json",
+			// url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
+			url: "demo/testData.json",
 			dataType: "json",
 			success: parseTwitter
 		});
@@ -119,7 +119,7 @@
    	  show();
       
       
-    }, 30000); //every 1 seconds
+    }, 1000); //every 1 seconds
   } else {
     // Show a new tab with an error message.
     chrome.tabs.create({url: 'error.html'});

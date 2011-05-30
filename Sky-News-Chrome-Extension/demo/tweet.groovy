@@ -6,7 +6,7 @@ stories << "Volcanic ash cloud threat hits airline shares"
 stories << "Canada once again better than USA"
 stories << "Americans admit they aren't as cool as Canadian"
 
-def json = new File('/Users/saqui/workspace/extension/demo/testData.json')
+def json = new File('testData.json')
 
 def output = new File('output')
 
