@@ -16,10 +16,13 @@
             console.log('twitter popup - inside of show');
             $.ajax({
                 type: "GET",
-                url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
-                // url: "demo/testData.json",
+                //url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
+                url: "demo/testData.json",
                 dataType: "json",
-                success: parseTwitter
+                success: parseTwitter,
+		error: function(e){
+		   console.log('Error is', e);
+		}
             });
         }       
 
@@ -84,7 +87,8 @@
             }
 
         };
-		show();
+
+	show();
 
     };
     //end of twitter
