@@ -5,10 +5,10 @@ var background = {
         //if it is do nothing
         //else display popup
         var lastTweetId = twitter[0].id_str
-        var lastTweetInDb = this.getItem('lastTweet');
+        var lastTweetInDb = background.getItem('lastTweet');
         if (lastTweetInDb != lastTweetId) {
-            this.setItem('lastTweet', lastTweetId);
-            this.popupNotification();
+            background.setItem('lastTweet', lastTweetId);
+            background.popupNotification();
         } else {
             console.log('lastTweet was not found', lastTweetInDb, lastTweetId);
         }
@@ -27,22 +27,22 @@ var background = {
 
     //Clears all the key value pairs in the local storage
     clearStrg: function() {
-        log('about to clear local storage');
+        console.log('about to clear local storage');
         window.localStorage.clear();
-        log('cleared');
+        console.log('cleared');
     },
 
     //sets the item in the localstorage
     setItem: function(key, value) {
         try {
-            log("Inside setItem:" + key + ":" + value);
+            console.log("Inside setItem:" + key + ":" + value);
             window.localStorage.removeItem(key);
             window.localStorage.setItem(key, value);
         } catch(e) {
-            log("Error inside setItem");
-            log(e);
+            console.log("Error inside setItem");
+            console.log(e);
         }
-        log("Return from setItem" + key + ":" + value);
+        console.log("Return from setItem" + key + ":" + value);
     },
 
     //Gets the item from local storage with the specified
