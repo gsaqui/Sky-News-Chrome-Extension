@@ -12,6 +12,7 @@
 <!-- http://twitter.com/about/resources/widgets/widget_profile-->
 <script src = "/js/jquery-1.6.1.js"></script>
 <script src = "/js/jquery.jqote2.js"></script>
+<script src = "/js/background.js"></script>
 
 <script type="text/x-jqote-template" id="template">
     <![CDATA[
@@ -22,91 +23,7 @@
 </script>
 
 <script>
-	function parseTwitter(twitter){
-		//get feed
-		//get the first item in the json and check to see if it's in the db
-		//if it is do nothing
-		//else display popup
-		var lastTweetId = twitter[0].id_str
-		var lastTweetInDb = getItem('lastTweet');
-		if(lastTweetInDb != lastTweetId){
-			setItem('lastTweet', lastTweetId);
-			popupNotification();
-		} else{
-			console.log('lastTweet was not found', lastTweetInDb, lastTweetId);
-		}
-	}
-
-	function popupNotification(){
-		var pinnedPopup = window.webkitNotifications.createHTMLNotification(chrome.extension.getURL('twitterPopup.html'));
-		pinnedPopup.ondisplay = function(){pinnedPopupOpen = true;};
-		pinnedPopup.onclose = function(){pinnedPopupOpen = false;};		
-		pinnedPopup.show();
-	}
 	
-	//Clears all the key value pairs in the local storage
-	  function clearStrg() {
-	    log('about to clear local storage');
-	    window.localStorage.clear();
-	    log('cleared');
-	  }
-	
-	//sets the item in the localstorage
-	  function setItem(key, value) {
-	    try {
-	      log("Inside setItem:" + key + ":" + value);
-	      window.localStorage.removeItem(key);
-	      window.localStorage.setItem(key, value);
-	    }catch(e) {
-	      log("Error inside setItem");
-	      log(e);
-	    }
-	    log("Return from setItem" + key + ":" +  value);
-	  }
-	  //Gets the item from local storage with the specified
-	  //key
-	  function getItem(key) {
-	    var value;
-	    log('Get Item:' + key);
-	    try {
-	      value = window.localStorage.getItem(key);
-	    }catch(e) {
-	      log("Error inside getItem() for key:" + key);
-		  log(e);
-		  value = "null";
-	    }
-	    log("Returning value: " + value);
-	    return value;
-	  }
-	  //Clears all the key value pairs in the local storage
-	  function clearStrg() {
-	    log('about to clear local storage');
-	    window.localStorage.clear();
-	    log('cleared');
-	  }
-	
-	function log(txt) {
-		var logging = true;
-	    if(logging) {
-	      console.log(txt);
-	    }
-	  }
-
-  
-  function show() {
-    var enabled = window.localStorage.getItem('isTwitterEnabled');
-	
-	if(enabled === 'true'){
-	    $.ajax({
-			type: "GET",
-			// url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
-			url: "demo/testData.json",
-			dataType: "json",
-			success: parseTwitter
-		});
-	}
-  } //end of show
-
   //Adding twitter enabled for demo
   window.localStorage.setItem('isTwitterEnabled', true);
   window.localStorage.setItem('rssFeedToFollow', 'http://news.sky.com/sky-news/rss/home/rss.xml');
@@ -116,7 +33,7 @@
 
     setInterval(function() {
       interval++;
-   	  show();
+   	  background.show();
       
       
     }, 1000); //every 1 seconds
