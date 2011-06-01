@@ -10,14 +10,18 @@
                 tweet: twitter[0].text,
                 time: timeAgo(twitter[0].created_at)
             });
+            close();
+        }
+
+        function close(){
+            window.close();
         }
 
         function show() {
             console.log('twitter popup - inside of show');
             $.ajax({
                 type: "GET",
-                //url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
-                url: "demo/testData.json",
+                url: globals.url,
                 dataType: "json",
                 success: parseTwitter,
 		error: function(e){
@@ -27,7 +31,7 @@
         }       
 
         /**
-		  *  This was taken from the twitter website - I didn't write it
+              *  This was taken from the twitter website - I didn't write it
 	      * relative time calculator
 	      * @param {string} twitter date string returned from Twitter API
 	      * @return {string} relative time like "2 minutes ago"

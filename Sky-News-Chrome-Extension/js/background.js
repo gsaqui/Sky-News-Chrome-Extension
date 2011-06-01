@@ -16,12 +16,15 @@ var background = {
 
     popupNotification: function() {
         var pinnedPopup = window.webkitNotifications.createHTMLNotification(chrome.extension.getURL('twitterPopup.html'));
+    /*
+        
         pinnedPopup.ondisplay = function() {
             pinnedPopupOpen = true;
         };
         pinnedPopup.onclose = function() {
             pinnedPopupOpen = false;
         };
+        */
         pinnedPopup.show();
     },
 
@@ -67,8 +70,8 @@ var background = {
         if (enabled === 'true') {
             $.ajax({
                 type: "GET",
-                // url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=SkyNewsBreak",
-                url: "demo/testData.json",
+                
+                url: globals.url,
                 dataType: "json",
                 success: self.parseTwitter
             });

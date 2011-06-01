@@ -14,3 +14,4 @@ Idea
 - If no one has clicked on the three links and another one comes delete one that is visible.
 - Allow the user to switch which twitter feed based on location - change extension name
 - tweet from inside of the popup
+- Handle corporate enviroments where one can hit the rate limit
