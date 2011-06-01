@@ -1,22 +1,18 @@
 var background = {
     parseTwitter: function(twitter) {
-        //get feed
-        //get the first item in the json and check to see if it's in the db
-        //if it is do nothing
-        //else display popup
+        
         var lastTweetId = twitter[0].id_str
         var lastTweetInDb = background.getItem('lastTweet');
         if (lastTweetInDb != lastTweetId) {
             background.setItem('lastTweet', lastTweetId);
             background.popupNotification();
         } else {
-            console.log('lastTweet was not found', lastTweetInDb, lastTweetId);
+            //console.log('lastTweet was not found', lastTweetInDb, lastTweetId);
         }
     },
 
     popupNotification: function() {
         var pinnedPopup = window.webkitNotifications.createHTMLNotification(chrome.extension.getURL('twitterPopup.html'));
-    /*
         
         pinnedPopup.ondisplay = function() {
             pinnedPopupOpen = true;
@@ -24,7 +20,7 @@ var background = {
         pinnedPopup.onclose = function() {
             pinnedPopupOpen = false;
         };
-        */
+
         pinnedPopup.show();
     },
 
