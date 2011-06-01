@@ -10,6 +10,10 @@
 	
 <script>
 	$('body').twitter({});
+	
+	chrome.extension.sendRequest({greeting: "hello"}, function(response) {
+        console.log(response.farewell);
+    });
 </script>
 </body>
 

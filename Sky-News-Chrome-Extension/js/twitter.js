@@ -14,7 +14,7 @@
         }
 
         function close(){
-            window.close();
+            //window.close();
         }
 
         function show() {
