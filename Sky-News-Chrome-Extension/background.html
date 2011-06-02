@@ -41,40 +41,4 @@
     chrome.tabs.create({url: 'error.html'});
   }
 
-
-var listOfListeners = []
-//General listener
-    chrome.extension.onConnect.addListener(function(port) {
-        listOfListeners.push(port);
-            console.log('inside of add Listener', port);
-          console.assert(port.name == "knockknock");
-          port.onMessage.addListener(function(msg) {
-            if (msg.joke == "Knock knock")
-              port.postMessage({question: "Who's there?"});
-            else if (msg.answer == "Madame")
-              port.postMessage({question: "Madame who?"});
-            else if (msg.answer == "Madame... Bovary"){
-                  port.postMessage({question: "I don't get it."});
-                  
-                  console.log('size of array is ', listOfListeners);
-                  listOfListeners.each(function(i){
-                    listOfListeners[i].postMessage('Something else');
-                  });
-              }
-              
-          });
-    });
-
-/*  
-  chrome.extension.onRequest.addListener(
-      function(request, sender, sendResponse) {
-        console.log(sender.tab ?
-                    "from a content script:" + sender.tab.url :
-                    "from the extension id:"+sender.id);
-        if (request.greeting == "hello")
-          sendResponse({farewell: "goodbye "});
-        else
-          sendResponse({}); // snub them.
-  });
-  */
 </script>

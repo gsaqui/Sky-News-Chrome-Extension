@@ -9,7 +9,6 @@ stories << "Americans admit they aren't as cool as Canadian"
 def json = new File('testData.json')
 
 def output = new File('output')
-
 json.eachLine(){line, number ->
     Random random = new Random()
     def randomNum = random.nextInt(5)
@@ -17,7 +16,7 @@ json.eachLine(){line, number ->
 	def timeStr = time.format('H:mm:ss');
 
     if(line.contains('text')){
-        output << """"text":"${stories[randomNum]}","""
+        output << """"text":"${stories[randomNum]} ${args[0]}","""
     } else     if(line.contains('id_str')){
         output << """"id_str":"${time.getTime()}" """
     } else{

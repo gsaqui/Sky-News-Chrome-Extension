@@ -1,6 +1,9 @@
 var background = {
+    listOfListeners: [],
+    eventsHaveBeenRegistered: 0,
+
     parseTwitter: function(twitter) {
-        
+
         var lastTweetId = twitter[0].id_str
         var lastTweetInDb = background.getItem('lastTweet');
         if (lastTweetInDb != lastTweetId) {
@@ -8,12 +11,13 @@ var background = {
             background.popupNotification();
         } else {
             //console.log('lastTweet was not found', lastTweetInDb, lastTweetId);
-        }
+            }
     },
 
     popupNotification: function() {
+        this.closeOldestNotification();
         var pinnedPopup = window.webkitNotifications.createHTMLNotification(chrome.extension.getURL('twitterPopup.html'));
-        
+
         pinnedPopup.ondisplay = function() {
             pinnedPopupOpen = true;
         };
@@ -22,6 +26,34 @@ var background = {
         };
 
         pinnedPopup.show();
+    },
+
+    registerWindowListener: function() {
+        if (this.eventsHaveBeenRegistered > 0) return;
+
+        this.eventsHaveBeenRegistered = this.eventsHaveBeenRegistered + 1;
+        //General listener
+        chrome.extension.onConnect.addListener(function(port) {
+            background.listOfListeners.push(port);
+            port.onDisconnect.addListener(function(msg) {
+                console.log(msg);
+            });            
+        });
+    },
+
+    closeOldestNotification: function() {
+        if (this.listOfListeners.length >= 3) {
+            var elementsToRemove = this.listOfListeners.splice(0, this.listOfListeners.length - 2);
+
+            $.each(elementsToRemove, function(index, value) {
+                try {
+                    value.postMessage({
+                        action: 'close'
+                    });
+                } catch(e){}
+
+            });
+        }
     },
 
     //Clears all the key value pairs in the local storage
@@ -62,11 +94,12 @@ var background = {
 
     show: function() {
         var enabled = window.localStorage.getItem('isTwitterEnabled');
-		var self = this;
+        this.registerWindowListener();
+        var self = this;
         if (enabled === 'true') {
             $.ajax({
                 type: "GET",
-                
+
                 url: globals.url,
                 dataType: "json",
                 success: self.parseTwitter

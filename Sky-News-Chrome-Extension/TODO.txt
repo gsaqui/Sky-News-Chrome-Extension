@@ -11,7 +11,8 @@ Idea
 	- crowd sourcing?  -- how can we put that in our extension
 	
 	
-- If no one has clicked on the three links and another one comes delete one that is visible.
+- If no one has clicked on the three links and another one comes delete one that is visible.done
 - Allow the user to switch which twitter feed based on location - change extension name
 - tweet from inside of the popup
 - Handle corporate enviroments where one can hit the rate limit
+- handle onDisconnect
