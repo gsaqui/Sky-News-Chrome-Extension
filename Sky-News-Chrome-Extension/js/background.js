@@ -35,8 +35,17 @@ var background = {
         //General listener
         chrome.extension.onConnect.addListener(function(port) {
             background.listOfListeners.push(port);
-            port.onDisconnect.addListener(function(msg) {
-                console.log(msg);
+            port.onDisconnect.addListener(function(port) {
+                var portToRemoveIndex = -1
+                $.each(background.listOfListeners, function(index, value){
+                    if(value.id == port.id){
+                        portToRemoveIndex = index;
+                        return false;
+                    }
+                });
+                if(portToRemoveIndex >=0){
+                    background.listOfListeners.splice(portToRemoveIndex,1);
+                }
             });            
         });
     },
