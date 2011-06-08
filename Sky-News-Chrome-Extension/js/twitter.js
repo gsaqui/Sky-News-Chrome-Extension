@@ -2,23 +2,18 @@
     // secure $ jQuery alias
     $.fn.twitter = function(options) {
         function parseTwitter(twitter) {
-            console.log('hi');
+            
             var $tmpl = $('#template');
-            // console.log('date is ', twitter[0].created_at, this.timeAgo(twitter[0].created_at))
             // add twitter links
             $('#news-items').jqoteapp($tmpl, {
                 tweet: twitter[0].text,
                 time: timeAgo(twitter[0].created_at)
             });
-            close();
+            registerClose();
         }
 
-        function close() {
-            //http://code.google.com/chrome/extensions/messaging.html
-            /*            chrome.extension.sendRequest({tweetTime: "hello", }, function(response) {
-                console.log(response.farewell);
-            }); */
-            //window.close();
+        function registerClose() {
+                        
             var port = chrome.extension.connect({
                 name: "twitterNotification"
             });
@@ -29,7 +24,7 @@
 
             //waits for response
             port.onMessage.addListener(function(msg) {
-                console.log('msg coming back is ', msg);
+//                console.log('msg coming back is ', msg);
                 if (msg.action == "close") {
                     window.close();
                 }
@@ -39,7 +34,6 @@
         }
 
         function show() {
-            console.log('twitter popup - inside of show');
             $.ajax({
                 type: "GET",
                 url: globals.url,
@@ -52,7 +46,7 @@
         }
 
         /**
-              *  This was taken from the twitter website - I didn't write it
+          *  This was taken from the twitter website - I didn't write it
 	      * relative time calculator
 	      * @param {string} twitter date string returned from Twitter API
 	      * @return {string} relative time like "2 minutes ago"
@@ -117,5 +111,4 @@
 
     };
     //end of twitter
-})(jQuery);
-// confine scope
+})(jQuery);// confine scope

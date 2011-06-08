@@ -67,22 +67,17 @@ var background = {
 
     //Clears all the key value pairs in the local storage
     clearStrg: function() {
-        console.log('about to clear local storage');
         window.localStorage.clear();
-        console.log('cleared');
     },
 
     //sets the item in the localstorage
     setItem: function(key, value) {
         try {
-            console.log("Inside setItem:" + key + ":" + value);
             window.localStorage.removeItem(key);
             window.localStorage.setItem(key, value);
         } catch(e) {
-            console.log("Error inside setItem");
             console.log(e);
         }
-        console.log("Return from setItem" + key + ":" + value);
     },
 
     //Gets the item from local storage with the specified

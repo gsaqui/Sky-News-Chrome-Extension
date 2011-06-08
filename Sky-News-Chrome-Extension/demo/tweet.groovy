@@ -1,3 +1,6 @@
+/**
+Generates tweets so that it's easy to test
+*/
 
 def stories = []
 stories << "Obama praises 'extraordinary' Irish"
@@ -16,7 +19,7 @@ json.eachLine(){line, number ->
 	def timeStr = time.format('H:mm:ss');
 
     if(line.contains('text')){
-        output << """"text":"${stories[randomNum]} ${args[0]}","""
+        output << """"text":"${stories[randomNum]} ${args ? args[0] : ''}","""
     } else     if(line.contains('id_str')){
         output << """"id_str":"${time.getTime()}" """
     } else{
