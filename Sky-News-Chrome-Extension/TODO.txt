@@ -15,3 +15,4 @@ Idea
 - Allow the user to switch which twitter feed based on location - change extension name
 - Handle corporate enviroments where one can hit the rate limit - almost done
 - handle onDisconnect - done
+- icon 128, 48, 16
