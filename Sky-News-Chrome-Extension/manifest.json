@@ -6,6 +6,12 @@
     "default_icon": "icon.png",
 	 "popup": "buttonPopup.html"
   },
+  "icons": {
+    "128": "news_skynews_icon-128.png",
+     "48": "news_skynews_icon-48.png",
+     "32": "news_skynews_icon-32.png",
+     "16":"news_skynews_icon-16.png"
+  },
   "background_page": "background.html",
   "options_page": "options.html",
   "permissions": [
