@@ -106,7 +106,10 @@ var background = {
 
                 url: globals.url,
                 dataType: "json",
-                success: self.parseTwitter
+                success: self.parseTwitter,
+                error: function(e){
+                    console.log('error attempting to contact twitter', e);
+                }
             });
         }
     }
